@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>All Flats (<%= @flats.count %>)</h1>
+  <div class="row g-3">
+      <% @flats.each do |flat| %>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100">
+            <% if flat.picture_url.present? %>
+              <%= image_tag flat.picture_url, class: "card-img-top", style: "height: 200px; object-fit: cover"; %>
+            <% end %>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><%= flat.name %></h5>
+                <p class="card-text"><%= flat.address %></p>
+                <p class="card-text">
+                  <i class="fa-solid fa-people-group"></i> <%= flat.number_of_guests %> <i class="fa-solid fa-sterling-sign"></i><%= flat.price_per_night %>/night</p>
+                <div class="mt-auto">
+                  <%= link_to "More Info", flat_path(flat), class: "link-primary" %>
+                  <%== "&nbsp;|&nbsp;" %>
+                  <%= link_to "Edit", edit_flat_path(flat), class: "link-warning" %>
+                  <%== "&nbsp;|&nbsp;" %>
+                  <%= link_to "Remove", flat_path(flat), class: "link-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+                </div>
+              </div>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div>
